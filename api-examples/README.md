@@ -1,5 +1,9 @@
 # Rust Client Sample API - for Fluvio Streaming Platform
 
+## Topic Operations
+
+
+
 ## Producer/Consumer
 
 Producer/Consumer tests assume that a topic 'my-topic-1' has been created.

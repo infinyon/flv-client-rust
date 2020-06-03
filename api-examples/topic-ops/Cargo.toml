@@ -1,5 +1,5 @@
 [package]
-name = "add-topic"
+name = "topic-ops"
 version = "0.2.0"
 edition = "2018"
 authors = ["Fluvio Contributors <team@fluvio.io>"]

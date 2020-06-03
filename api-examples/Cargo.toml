@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "add-topic",
+    "topic-ops",
     "consume",
     "produce"
 ]
