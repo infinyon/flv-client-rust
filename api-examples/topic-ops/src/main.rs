@@ -7,17 +7,6 @@ use flv_client::ClientError;
 use flv_client::SpuController;
 use flv_future_aio::task::run_block_on;
 
-fn main() {
-    let (command, topic) = get_params();
-    match command.as_str() {
-        "create" => run_block_on(create_topic(topic)).expect("run"),
-        "get" => run_block_on(get_topic(topic)).expect("run"),
-        "list" => run_block_on(list_topic()).expect("run"),
-        "delete" => run_block_on(delete_topic(topic)).expect("run"),
-        &_ => {}
-    }
-}
-
 async fn create_topic(topic: String) -> Result<(), ClientError> {
     let config = ScConfig::new(None, None).expect("connect");
     let mut client = config.connect().await.expect("should connect");
@@ -79,6 +68,17 @@ async fn delete_topic(topic: String) -> Result<(), ClientError> {
     println!("{:?}", res);
 
     Ok(())
+}
+
+fn main() {
+    let (command, topic) = get_params();
+    match command.as_str() {
+        "create" => run_block_on(create_topic(topic)).expect("run"),
+        "get" => run_block_on(get_topic(topic)).expect("run"),
+        "list" => run_block_on(list_topic()).expect("run"),
+        "delete" => run_block_on(delete_topic(topic)).expect("run"),
+        &_ => {}
+    }
 }
 
 fn get_params() -> (String, String) {
