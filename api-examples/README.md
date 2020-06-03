@@ -27,6 +27,14 @@ Topic operations has sample APIs for topic create, list and delete:
 test1
 ```
 
+### Get Topic
+
+```
+> ../target/debug/topic-ops get test1
+[TopicMetadata { name: "test1", error: None, topic: Some(Topic { type_computed: true, assigned_partitions: None, partitions: Some(1), replication_factor: Some(2), ignore_rack_assignment: true, status: Provisioned, reason: "", partition_map: Some([PartitionReplica { id: 0, leader: 5003, replicas: [5003, 5001], live_replicas: [0, 5001] }]) }) }]
+```
+
+
 ### List Topics
 
 ```

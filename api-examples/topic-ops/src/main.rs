@@ -11,8 +11,9 @@ fn main() {
     let (command, topic) = get_params();
     match command.as_str() {
         "create" => run_block_on(create_topic(topic)).expect("run"),
-        "delete" => run_block_on(delete_topic(topic)).expect("run"),
+        "get" => run_block_on(get_topic(topic)).expect("run"),
         "list" => run_block_on(list_topic()).expect("run"),
+        "delete" => run_block_on(delete_topic(topic)).expect("run"),
         &_ => {}
     }
 }
@@ -53,6 +54,18 @@ async fn list_topic() -> Result<(), ClientError> {
     Ok(())
 }
 
+async fn get_topic(topic: String) -> Result<(), ClientError> {
+    let config = ScConfig::new(None, None).expect("connect");
+    let mut client = config.connect().await.expect("should connect");
+    let res = client
+        .topic_metadata(Some(vec![topic]))
+        .await
+        .expect("should list topics");
+
+    println!("{:?}", res);
+    Ok(())
+}
+
 async fn delete_topic(topic: String) -> Result<(), ClientError> {
     let config = ScConfig::new(None, None).expect("connect");
     let mut client = config.connect().await.expect("should connect");
@@ -78,7 +91,7 @@ fn get_params() -> (String, String) {
     if args.len() < 2 {
         err = true;
     } else {
-        if !vec!["create", "list", "delete"].contains(&args[1].as_str()) {
+        if !vec!["create", "get", "list", "delete"].contains(&args[1].as_str()) {
             err = true;
         } else {
             command = (&args[1]).to_string();
@@ -93,7 +106,7 @@ fn get_params() -> (String, String) {
     }
 
     if err {
-        println!("Usage: topic-ops [create|list|delete] <topic-name>");
+        println!("Usage: topic-ops [create|get|list|delete] <topic-name>");
         exit(-1);
     }
 
