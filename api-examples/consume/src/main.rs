@@ -25,7 +25,7 @@ async fn consumer() -> Result<(), ClientError> {
         .expect("replica missing");
     let mut log_stream = replica.fetch_logs(FetchOffset::Earliest(None), FetchLogOption::default());
 
-    // read stream and print records
+    // read read from producer and print to terminal
     while let Some(response) = log_stream.next().await {
         let records = response.records;
         for batch in records.batches {
