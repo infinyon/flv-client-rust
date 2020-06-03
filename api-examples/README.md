@@ -1,21 +1,8 @@
 # Rust Client Sample API - for Fluvio Streaming Platform
 
-## Topic Operations
-
-
-
-## Producer/Consumer
-
-Producer/Consumer tests assume that a topic 'my-topic-1' has been created.
-To create a topic through fluvio cli:
-
-```
-> fluvio topic create my-topic-1
-```
-
 ### Build Binaries
 
-Build producer/consumer by running the following command at the top of the tree:
+Build all binaries by running the following command at the top of the tree:
 
 ```
 > cargo build
@@ -25,7 +12,45 @@ The build script generates the following binaries:
 ```
 ./target/debug/flv-consumer
 ./target/debug/flv-producer
+./target/debug/topic-ops
 ```
+
+
+## Topic Operations
+
+Topic operations has sample APIs for topic create, list and delete:
+
+### Topic Create
+
+```
+> ../target/debug/topic-ops create test1
+test1
+```
+
+### List Topics
+
+```
+> ../target/debug/topic-ops list
+[TopicMetadata { name: "test1", error: None, topic: Some(Topic { type_computed: true, assigned_partitions: None, partitions: Some(1), replication_factor: Some(2), ignore_rack_assignment: true, status: Provisioned, reason: "", partition_map: Some([PartitionReplica { id: 0, leader: 5001, replicas: [5001, 5002], live_replicas: [0, 5002] }]) }) }]
+```
+
+### Topic Delete
+
+```
+> ../target/debug/topic-ops create test1
+test1
+```
+
+
+## Producer/Consumer
+
+Producer/Consumer requires the 'my-topic-1' topic to be created.
+The topic may be created through Fluvio ClI or the script above:
+
+```
+> ./target/debug/topic-ops create my-topic-1
+```
+
 
 #### Start Producer
 
