@@ -12,6 +12,7 @@ The build script generates the following binaries:
 ```
 ./target/debug/flv-consumer
 ./target/debug/flv-producer
+./target/debug/stress-test
 ./target/debug/topic-ops
 ```
 
@@ -84,7 +85,13 @@ this is line 1
 this is line 2
 ```
 
-#### Stress Test
+### Stress Test
+
+The stress test reads from the record file (30 records of various sizes) and sends them to the topic. A loop counter of 1 sends 30 records, a loop counter of 10 sends 300 records, etc.
+
+#### Run Stress Test
+
+Open a terminal, create topic "stress-test-topic" and run stress test.
 
 ```
 > ./target/debug/topic-ops create stress-test-topic
