@@ -23,14 +23,14 @@ Topic operations has sample APIs for topic create, list and delete:
 ### Topic Create
 
 ```
-> ../target/debug/topic-ops create test1
+> ./target/debug/topic-ops create test1
 test1
 ```
 
 ### Get Topic
 
 ```
-> ../target/debug/topic-ops get test1
+> ./target/debug/topic-ops get test1
 [TopicMetadata { name: "test1", error: None, topic: Some(Topic { type_computed: true, assigned_partitions: None, partitions: Some(1), replication_factor: Some(2), ignore_rack_assignment: true, status: Provisioned, reason: "", partition_map: Some([PartitionReplica { id: 0, leader: 5003, replicas: [5003, 5001], live_replicas: [0, 5001] }]) }) }]
 ```
 
@@ -45,7 +45,7 @@ test1
 ### Topic Delete
 
 ```
-> ../target/debug/topic-ops create test1
+> ./target/debug/topic-ops create test1
 test1
 ```
 
@@ -82,4 +82,11 @@ Open a new terminal and start consumer:
 > ./target/debug/flv-consumer
 this is line 1
 this is line 2
+```
+
+#### Stress Test
+
+```
+> ./target/debug/topic-ops create stress-test-topic
+> ./target/debug/stress-test ./stress-test/test-data/records.txt 10
 ```

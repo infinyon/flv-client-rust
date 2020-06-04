@@ -2,5 +2,6 @@
 members = [
     "topic-ops",
     "consume",
-    "produce"
+    "produce",
+    "stress-test"
 ]

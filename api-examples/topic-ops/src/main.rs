@@ -51,7 +51,12 @@ async fn get_topic(topic: String) -> Result<(), ClientError> {
         .await
         .expect("should list topics");
 
-    println!("{:?}", res);
+    if res.len() > 0 && res[0].error.is_some() {
+        println!("Error {:?}", res[0].error.unwrap());
+    } else {
+        println!("{:?}", res);
+    }
+
     Ok(())
 }
 
