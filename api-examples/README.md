@@ -1,5 +1,13 @@
 # Rust Client Sample API - for Fluvio Streaming Platform
 
+### Requirement
+
+The examples assumes a cluster with 3 SPUs. On a local system, run
+
+```
+> ./target/debug/fluvio cluster install --local --spu 3
+```
+
 ### Build Binaries
 
 Build all binaries by running the following command at the top of the tree:
