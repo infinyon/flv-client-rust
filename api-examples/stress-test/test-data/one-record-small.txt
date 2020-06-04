@@ -1,0 +1,1 @@
+{"uri":"flv://mysql.local/mysql/time_zone_transition_type","sequence":30,"bn_file":{"fileName":"mysql-bin.000002","offset":817810}}
