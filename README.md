@@ -1,6 +1,6 @@
 # Rust Demo Apps
 
-Sample application that use Fluvio data streaming for real-time data transfer.
+Sample APIs and Applications for Fluvio data streaming platform.
 
 ## Table of Contents
 
