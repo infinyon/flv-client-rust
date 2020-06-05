@@ -7,12 +7,15 @@ use flv_client::ClientError;
 use flv_client::SpuController;
 use flv_future_aio::task::run_block_on;
 
+const PARTITION_COUNT: i32 = 1;
+const REPLICA_COUNT: i16 = 1;
+
 async fn create_topic(topic: String) -> Result<(), ClientError> {
     let config = ScConfig::new(None, None).expect("connect");
     let mut client = config.connect().await.expect("should connect");
 
     // topic parameters
-    let (partitions, replicas) = (1, 2);
+    let (partitions, replicas) = (PARTITION_COUNT, REPLICA_COUNT);
     let ignore_rack_assign = true;
     let validate_only = false;
 

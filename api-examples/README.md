@@ -1,14 +1,17 @@
 # Rust Client Sample API - for Fluvio Streaming Platform
 
-### Requirement
+## Requirement
 
-The examples assumes a cluster with 3 SPUs. On a local system, run
+These code samples assume you have access to a Fluvio cluster. To checkout your cluster profile, run the following command:
 
 ```
-> ./target/debug/fluvio cluster install --local --spu 3
+> ./target/debug/fluvio profile view
 ```
 
-### Build Binaries
+By default, the topics are created with 1 partition and 1 replication factor.
+
+
+## Build Binaries
 
 Build all binaries by running the following command at the top of the tree:
 
@@ -17,17 +20,19 @@ Build all binaries by running the following command at the top of the tree:
 ```
 
 The build script generates the following binaries:
+
 ```
-./target/debug/flv-consumer
-./target/debug/flv-producer
-./target/debug/stress-test
 ./target/debug/topic-ops
+./target/debug/produce
+./target/debug/consume
+./target/debug/fetch-last
+./target/debug/stress-test
 ```
 
 
 ## Topic Operations
 
-Topic operations has sample APIs for topic create, list and delete:
+Topic operations has sample APIs to create, get, list, and delete topics:
 
 ### Topic Create
 
@@ -59,33 +64,37 @@ test1
 ```
 
 
-## Producer/Consumer
+## Produce
 
-Producer/Consumer requires the 'my-topic-1' topic to be created.
-The topic may be created through Fluvio ClI or the script above:
+The producer assumes that 'my-topic-1' topic has been created.
+To create a topic, you may use the CLI or run the script above:
 
 ```
 > ./target/debug/topic-ops create my-topic-1
 ```
 
 
-#### Start Producer
+### Start Producer
 
 The producers waits for user input and feeds the topic one message per line.
-
-Open terminal, start producer, and generate a few messages:
+Start the producer and generate a few messages:
 
 ```
-> ./target/debug/flv-producer
+> ./target/debug/produce
 this is line 1
 this is line 2
 ```
 
-#### Start Consumer
 
-Consumer reads all messages stored in the topic and continues listening for additional messages. 
+## Consume
 
-Open a new terminal and start consumer:
+The producer reads from 'my-topic-1' and it assumes it has been created.
+
+### Start Consumer
+
+Consumer reads all messages currently in the topic and continues listening for additional messages. 
+
+Start the producer and read messages:
 
 ```
 > ./target/debug/flv-consumer
@@ -93,15 +102,47 @@ this is line 1
 this is line 2
 ```
 
-### Stress Test
+## Fetch Last
 
-The stress test reads from the record file (30 records of various sizes) and sends them to the topic. A loop counter of 1 sends 30 records, a loop counter of 10 sends 300 records, etc.
+Fluvio can fetch records from different offsets in the stream:
 
-#### Run Stress Test
+* an exact offset,
+* a relative offset from the beginning
+* a relative offset from  the end
 
-Open a terminal, create topic "stress-test-topic" and run stress test.
+This example show how to read the last records in the stream. 
+
+The API reads from 'my-topic-1' and it assumes it has been created.
+
+To fetch last message:
+
+```
+> ./target/debug/fetch-last
+this is line 2
+```
+
+
+## Stress Test
+
+The producer assumes that 'stress-test-topic' topic has been created. To create the topic, run the following command:
 
 ```
 > ./target/debug/topic-ops create stress-test-topic
-> ./target/debug/stress-test ./stress-test/test-data/records.txt 10
 ```
+
+The stress test reads records from a file and sends each line to 'stress-test-topic'. The script also has a loop parameter that loops through the records as many times as desired.
+
+The stress has three files in the 'test-data' directory:
+
+* one-record-small.txt
+* one-record.txt
+* records.txt (30 records)
+
+A loop counter of 2 used in combination with 'records.txt' sends 30 records 2 times to a total of 60 records.
+
+#### Run Stress Test
+
+```
+> ./target/debug/stress-test ./stress-test/test-data/records.txt 2
+```
+

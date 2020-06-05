@@ -1,11 +1,11 @@
 [package]
-name = "consume"
+name = "fetch-last"
 version = "0.2.0"
 edition = "2018"
 authors = ["Fluvio Contributors <team@fluvio.io>"]
 license = "Apache-2.0"
 repository = "https://github.com/infinyon/node-demo-apps"
-description = "Fluvio Consumer API example"
+description = "Fluvio Fetch last record API example"
 
 [dependencies]
 flv-future-aio = "2.2.1"

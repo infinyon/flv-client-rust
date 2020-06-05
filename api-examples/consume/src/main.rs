@@ -9,21 +9,23 @@ use flv_client::SpuController;
 use flv_future_aio::task::run_block_on;
 
 fn main() {
-    run_block_on(consumer()).expect("run");
+    run_block_on(consume()).expect("run");
 }
 
-async fn consumer() -> Result<(), ClientError> {
+async fn consume() -> Result<(), ClientError> {
     let config = ScConfig::new(None, None).expect("connect");
     let mut client = config.connect().await.expect("should connect");
 
     // look-up stream for "my-topic-1"
     let topic = "my-topic-1";
     let partition = 0;
+    let offset = FetchOffset::Earliest(None);
+
     let mut replica = client
         .find_replica_for_topic_partition(topic, partition)
         .await
         .expect("replica missing");
-    let mut log_stream = replica.fetch_logs(FetchOffset::Earliest(None), FetchLogOption::default());
+    let mut log_stream = replica.fetch_logs(offset, FetchLogOption::default());
 
     // read read from producer and print to terminal
     while let Some(response) = log_stream.next().await {

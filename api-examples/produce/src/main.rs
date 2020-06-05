@@ -11,10 +11,10 @@ use flv_future_aio::io::BufReader;
 use flv_future_aio::task::run_block_on;
 
 fn main() {
-    run_block_on(producer()).expect("run");
+    run_block_on(produce()).expect("run");
 }
 
-async fn producer() -> Result<(), ClientError> {
+async fn produce() -> Result<(), ClientError> {
     let config = ScConfig::new(None, None).expect("connect");
     let mut client = config.connect().await.expect("should connect");
 
