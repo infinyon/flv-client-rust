@@ -130,9 +130,9 @@ The producer assumes that 'stress-test-topic' topic has been created. To create 
 > ./target/debug/topic-ops create stress-test-topic
 ```
 
-The stress test reads records from a file and sends each line to 'stress-test-topic'. The script also has a loop parameter that loops through the records as many times as desired.
+The stress test API reads records from a file and sends each line to 'stress-test-topic'. The script also has a loop parameter that loops through the records as many times as desired.
 
-The stress has three files in the 'test-data' directory:
+There are three data files provided in the 'test-data' directory:
 
 * one-record-small.txt
 * one-record.txt

@@ -4,7 +4,7 @@ version = "0.2.0"
 edition = "2018"
 authors = ["Fluvio Contributors <team@fluvio.io>"]
 license = "Apache-2.0"
-repository = "https://github.com/infinyon/node-demo-apps"
+repository = "https://github.com/infinyon/rust-demo-apps"
 description = "Fluvio Fetch last record API example"
 
 [dependencies]
