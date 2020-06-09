@@ -52,14 +52,14 @@ test1
 ### List Topics
 
 ```
-> ../target/debug/topic-ops list
+> ./target/debug/topic-ops list
 [TopicMetadata { name: "test1", error: None, topic: Some(Topic { type_computed: true, assigned_partitions: None, partitions: Some(1), replication_factor: Some(2), ignore_rack_assignment: true, status: Provisioned, reason: "", partition_map: Some([PartitionReplica { id: 0, leader: 5001, replicas: [5001, 5002], live_replicas: [0, 5002] }]) }) }]
 ```
 
 ### Topic Delete
 
 ```
-> ./target/debug/topic-ops create test1
+> ./target/debug/topic-ops delete test1
 test1
 ```
 
@@ -97,7 +97,7 @@ Consumer reads all messages currently in the topic and continues listening for a
 Start the producer and read messages:
 
 ```
-> ./target/debug/flv-consumer
+> ./target/debug/consume
 this is line 1
 this is line 2
 ```
