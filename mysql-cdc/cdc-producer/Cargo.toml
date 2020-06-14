@@ -1,0 +1,22 @@
+[package]
+name = "cdc-producer"
+version = "0.1.0"
+authors = ["Fluvio Contributors <team@fluvio.io>"]
+edition = "2018"
+
+[dependencies]
+crossbeam-channel = "0.4.2"
+mysql = "18.2.0"
+serde = "1.0.110"
+serde_derive = "1.0.110"
+serde_json = "1.0.53"
+dirs = "2.0.2"
+toml = "0.5.6"
+ctrlc = "3.1.4"
+flv-client = "3.1.0"
+flv-future-aio = "2.2.1"
+async-std = "1.6.0"
+structopt = { version = "0.3", default-features = false }
+mysql_binlog = { path="../rust-mysql-binlog" }
+cdc-messages = { path="../cdc-messages" }
+

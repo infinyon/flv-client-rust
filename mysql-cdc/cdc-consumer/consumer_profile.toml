@@ -1,0 +1,29 @@
+##
+# CDC Consumer Profile
+##
+
+##
+# Directory to store offset of the last item processed in the 'rust-mysql-cdc.ofs' file
+##
+local_cache = "~/mysql-cdc"
+
+##
+# Mysql database settings
+##
+[database]
+ip_or_host = "0.0.0.0"
+port = 3090
+user = "fluvio"
+password ="fluvio4cdc!"
+
+##
+# Filters to include or exclude databases
+##
+[filters]
+include_dbs = ["flvDb"]
+
+##
+# Fluvio streaming settings
+##
+[fluvio]
+topic ="rust-mysql-cdc"

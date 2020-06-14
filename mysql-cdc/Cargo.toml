@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "cdc-messages",
+    "cdc-producer",
+    "cdc-consumer",
+    "rust-mysql-binlog",
+]

@@ -1,0 +1,5 @@
+local_cache = "/tmp/data/cdc-consumer/mysql80"
+
+[database]
+ip_or_host = "localhost"
+user = "root"
