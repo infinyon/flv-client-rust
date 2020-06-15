@@ -121,7 +121,7 @@ async fn _get_last_record(replica: &mut SpuReplicaLeader) -> Result<Option<Strin
 
     if !response.error_code.is_ok() {
         if response.error_code.to_string() == "OffsetOutOfRange".to_owned() {
-            println!("fetch: stream is empty");
+            println!("fluvio: data stream is empty");
         } else {
             println!(
                 "Error (fetch_logs_once): {:?}",

@@ -9,7 +9,7 @@ In general these databases are on different machines, but for the purpose of thi
 If you just want to get started, ensure **Docker is Running** and invoke **Install** for **consumer** and **producer**:
 
 ```
-$ ./install.sh -n mysql-consumer -p 3080
+$ ./install.sh -n mysql-producer -p 3080
 $ ./install.sh -n mysql-consumer -p 3090
 ```
 
@@ -44,7 +44,7 @@ flvDb
 Start producer mysql container:
 
 ```
-./install.sh -n mysql-consumer -p 3080
+./install.sh -n mysql-producer -p 3080
 ```
 
 Ensure container is running
@@ -71,19 +71,6 @@ binlog.index
 
 You can login (assumes **mysql client** is installed on your machine).
 
-first, **as root**
-
-```
-$ mysql -h 0.0.0.0 -P 3080 -uroot -proot
-...
-Server version: 8.0.20 MySQL Community Server - GPL
-...
-
-mysql> 
-```
-
-then, **as fluvio**
-
 ```
 $ mysql -h 0.0.0.0 -P 3080 -ufluvio -pfluvio4cdc!
 ...
@@ -105,3 +92,19 @@ $ ./install.sh -n mysql-consumer -p 3090
 To ensure, consumer is also running, perform the same same checks as above on 
 * directory: **mysql-consumer**
 * port **3090**
+
+
+Connect to Consumer
+
+```
+$ mysql -h 0.0.0.0 -P 3090 -ufluvio -pfluvio4cdc!
+...
+Server version: 8.0.20 MySQL Community Server - GPL
+...
+
+mysql> 
+```
+
+## MYSQL Commands
+
+A list of mysql test commands can be found at [MYSQL-COMMANDS.MD](../MYSQL-COMMANDS.MD)

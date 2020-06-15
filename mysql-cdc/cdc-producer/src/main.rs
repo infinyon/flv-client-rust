@@ -23,12 +23,12 @@ fn start_loop() -> Result<(), Error> {
     let ctrl_c_events = ctrl_channel()?;
     let (sender, receiver) = bounded::<String>(100);
 
-    // create binlog manager
-    let bn_manager = BinLogManager::new(&profile, sender)?;
-
     // create fluvio manager
     let mut flv_manager = FluvioManager::new(profile.topic(), profile.replicas(), None)?;
     let bn_file = flv_manager.get_last_file_offset()?;
+
+    // create binlog manager
+    let bn_manager = BinLogManager::new(&profile, sender)?;
 
     // create resume
     let resume = Resume::new(bn_file);

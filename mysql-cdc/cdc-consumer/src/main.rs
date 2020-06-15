@@ -22,6 +22,7 @@ fn start_loop() -> Result<(), Error> {
     let mut store = LocalStore::init(profile.local_cache())?;
 
     // connect to db
+    println!("Connecting to mysql database... ");
     let mut mysql = MysqlManager::connect(profile)?;
 
     // create channels

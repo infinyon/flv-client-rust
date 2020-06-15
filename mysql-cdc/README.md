@@ -17,7 +17,9 @@ In **mysql-cdc** directory, build producer/consumer
 ```
 $ cargo build
 ...
-Finished dev [unoptimized + debuginfo] target(s) in
+   Compiling cdc-producer v0.1.0 (/projects/github/rust-demo-apps/mysql-cdc/cdc-producer)
+   Compiling cdc-consumer v0.1.0 (/projects/github/rust-demo-apps/mysql-cdc/cdc-consumer)
+    Finished dev [unoptimized + debuginfo] target(s) in 1m 21s
 ```
 
 ## Start CDC Producer
