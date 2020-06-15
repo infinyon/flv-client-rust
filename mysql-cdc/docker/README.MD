@@ -14,15 +14,16 @@ If your databases are already installed you may skip the Docker installation. Ch
 
 ## Installation Script
 
-Installation script script sets-up **root** password and creates a **fluvio** user.
-    * user: **root**, password: **root**
-    * user: **fluvio**, password: **fluvio4cdc!**
-      * **fluvio** user has **full privileges** to all databases prepended with **flvDb**.
+Installation script sets-up the **root** password and creates a **fluvio** user.
 
-To run installer, you must populate the following parameters:
+* user: **root**, password: **root**
+* user: **fluvio**, password: **fluvio4cdc!**
+  * **fluvio** user has **full privileges** to databases prepended with **flvDb**.
+
+The install script has the following parameters:
  * **-n**: container name
  * **-d**: local data path to map mysql data
- * **-p**: port of the mysql containers (producer: 3080, consumer: 3090)
+ * **-p**: port of the mysql containers (i.e. producer: 3080, consumer: 3090)
 
 
 ## Install Producer
