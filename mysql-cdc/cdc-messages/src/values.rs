@@ -1,7 +1,7 @@
 use bigdecimal::BigDecimal;
 use chrono::prelude::DateTime;
 use chrono::Utc;
-use serde_derive::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 use std::fmt;
 use std::time::{Duration, UNIX_EPOCH};
 
