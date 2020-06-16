@@ -2,14 +2,11 @@
 
 CDC sample application has a **producer** and a **consumer** that replicate database changes in real-time. **Cdc-producer** must be co-located with the **master** database to read its **binlog** files and generate Fluvio events. **Cdc-consumer** needs remote access to the **slave** database. For additional information, checkout [MYSQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html).
 
+
 ## Prerequisites
 
 * **Mysql Client** - for accessing mysql databases .
 * **Docker** - to run two MYSQL servers in parallel.
-
-**Note** 
-
-If your databases are already installed you may skip the Docker installation. Change the **producer-profile.toml** and **consumer-profile.toml** files instead.
 
 
 ## Installation Script
@@ -33,6 +30,10 @@ Run installer
 ```
 $ ./install.sh -n mysql-producer -d ~/mysql-cdc/mysql-producer -p 3080
 ```
+
+Producer mapped directory and port:
+* directory: **~/mysql-cdc/mysql-producer**
+* port **3080**
 
 Ensure container is running
 
@@ -76,8 +77,8 @@ Run installer
 $ ./install.sh -n mysql-consumer -d ~/mysql-cdc/mysql-consumer -p 3090
 ```
 
-To ensure, consumer is also running, perform the same same checks as above on 
-* directory: **mysql-consumer**
+Consumer mapped directory and port:
+* directory: **~/mysql-cdc/mysql-consumer**
 * port **3090**
 
 
@@ -92,6 +93,6 @@ Server version: 8.0.20 MySQL Community Server - GPL
 mysql> 
 ```
 
-## MYSQL Commands
+## Next Steps
 
-A list of mysql test commands can be found at [MYSQL-COMMANDS.MD](../MYSQL-COMMANDS.MD)
+Your environment is ready to [build and run Mysql-CDC](../README.md#build-producerconsumer).

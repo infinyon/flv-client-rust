@@ -3,7 +3,7 @@
 ##
 
 ##
-# File to save last read offset of the Fluvio stream. If consumer restarts, resume reading from this offset.
+# File to save last read offset of the Fluvio stream. If consumer restarts, it resumes reading from this offset.
 ##
 last_offset_file = "~/mysql-cdc/consumer.offset"
 
