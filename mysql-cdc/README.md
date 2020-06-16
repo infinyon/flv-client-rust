@@ -1,14 +1,28 @@
 # Mysql Change Data Capture (CDC) - on Fluvio Streaming Platform
 
-The following application translates Mysql table changes into events that can be used for database replication, audit trails, or any other type real-time data processing.
+**Change Data Capture (CDC)** converts database changes in real-time events that can be used to improve replication, keep audit trails, as well as feed downstream business intelligence tools.
+
+This demo focuses on **database replication**. We'll use a **CDC producer** to publish database events to a **Fluvio stream** and **CDC consumers** to create identical databases replicas.
 
 ## Requirements
 
-* Access to a Fluvio installation (local or cloud)
-    * [Setup Fluvio Cloud](https://app.fluvio.io/login)
+Access to a Fluvio installation (local or cloud)
 
-* (Laptop Demo) with 2 mysql instances running on same machine:
-    * [Setup Producer/Consumer Environment](./docker/README.MD)
+* [Setup Fluvio Cloud](https://app.fluvio.io/login)
+
+
+## Standalone Deployment
+
+For a standalone deployment using your own databases, use instructions in [cdc-consumer](./cdc-consumer/README.MD) and [cdc-producer](./cdc-producer/README.MD) sections.
+
+
+## Laptop Demo Deployment
+
+The laptop demo environment with 2+ mysql instances requires Docker:
+
+* [Setup MYSQL Docker Environment](./docker/README.MD)
+
+Please complete the Docker setup, before moving to the next section.
 
 
 ## Build Producer/Consumer
@@ -18,14 +32,16 @@ In **mysql-cdc** directory, build producer/consumer
 ```
 $ cargo build
 ...
-   Compiling cdc-producer v0.1.0 (/projects/github/rust-demo-apps/mysql-cdc/cdc-producer)
-   Compiling cdc-consumer v0.1.0 (/projects/github/rust-demo-apps/mysql-cdc/cdc-consumer)
-    Finished dev [unoptimized + debuginfo] target(s) in 1m 21s
+Compiling cdc-producer v0.1.0 (/projects/github/rust-demo-apps/mysql-cdc/cdc-producer)
+Compiling cdc-consumer v0.1.0 (/projects/github/rust-demo-apps/mysql-cdc/cdc-consumer)
+Finished dev [unoptimized + debuginfo] target(s) in 1m 21s
 ```
 
 ## Start CDC Producer
 
 **None**: Producer must be started before Consumer, as the producer creates the topic in Fluvio.
+
+Producer **profile** is configured to connect to the mysql database configured in [Docker setup](./docker/README.MD).
 
 Start producer:
 
@@ -34,6 +50,8 @@ Start producer:
 ```
 
 ## Start CDC Consumer
+
+Consumer **profile** is configured to connect to the mysql database configured in [Docker setup](./docker/README.MD). 
 
 Start consumer:
 
@@ -47,7 +65,7 @@ In two separate terminal windows, connect to the mysql databases
 
 ### Connect to Producer (master db)
 
-Docker [installation](./docker/README.MD) maps producer to port 3080.
+Producer database is mapped port **3080**.
 
 ```
 $ mysql -h 0.0.0.0 -P 3080 -ufluvio -pfluvio4cdc!
@@ -67,7 +85,7 @@ Database changed
 
 ### Connect to Consumer (slave db)
 
-Docker [installation](./docker/README.MD) maps consumer to port 3090.
+Consumer database is mapped port **3090**.
 
 ```
 $ mysql -h 0.0.0.0 -P 3090 -ufluvio -pfluvio4cdc!
@@ -75,7 +93,7 @@ $ mysql -h 0.0.0.0 -P 3090 -ufluvio -pfluvio4cdc!
 mysql >
 ```
 
-NOTE: The database has been crated the by the cdc-producer (check the log).
+**NOTE**: Database was crated the by the cdc-producer (check the log).
 
 Let's take a look:
 ```
@@ -96,7 +114,7 @@ Database changed
 
 In the producer terminal, generate mysql commands and see then propagated to the consumer database;
 
-### Consumer
+### Producer
 
 ```
 mysql> CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20), species VARCHAR(20), sex CHAR(1), birth DATE);
@@ -111,7 +129,7 @@ mysql> show tables;
 1 row in set (0.00 sec)
 ```
 
-### Producer
+### Consumer
 
 Create table has been propagated to the consumer:
 
@@ -128,6 +146,7 @@ mysql> show tables;
 ## Sample MYSQL Commands
 
 For additional mysql commands, checkout [MYSQL-COMMANDS](./MYSQL-COMMANDS.MD)
+
 
 ## Fluvio Events
 
