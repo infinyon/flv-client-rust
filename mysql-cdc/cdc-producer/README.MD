@@ -70,7 +70,12 @@ topic ="rust-mysql-cdc"
 replicas = 1
 ```
 
-For local setup, update the profile to match your local database and used to start producer
+### Start Consumer
+
+Provisioning a consumer to watch a local database is a 2 step process:
+
+1) Create a profile to match your database settings
+2) Start producer with custom profile
 
 ```
 $ ./target/debug/cdc-producer ./my-custom-config.toml
