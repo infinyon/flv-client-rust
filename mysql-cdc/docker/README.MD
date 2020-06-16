@@ -96,3 +96,19 @@ mysql>
 ## Next Steps
 
 Your environment is ready to [build and run Mysql-CDC](../README.md#build-producerconsumer).
+
+## Troubleshooting
+This guide helps users to solve issues they might face during the setup process.
+
+##### Mac OS X mysql-client Installation
+
+
+You have installed mysql-client using `brew install mysql-client`, but while trying to connect to producer or consumer database, you encounter the following error:
+
+```
+-bash: mysql: command not found
+```
+
+This indicates that you need to add mysql bin path to .bash_profile
+
+`export PATH="/usr/local/opt/mysql-client/bin:$PATH"`
