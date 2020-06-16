@@ -95,8 +95,6 @@ mysql>
 
 ## Next Steps
 
-A list of mysql test commands can be found at [MYSQL-COMMANDS.MD](../MYSQL-COMMANDS.MD)
-
 Your environment is ready to [build and run Mysql-CDC](../README.md#build-producerconsumer).
 
 ## Troubleshooting
