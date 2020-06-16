@@ -1,4 +1,4 @@
-local_cache = "~/data/cdc-consumer/mysql80"
+last_offset_file = "~/data/consumer.offset"
 
 [database]
 ip_or_host = "localhost"

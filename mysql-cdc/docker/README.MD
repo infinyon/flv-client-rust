@@ -1,6 +1,6 @@
 # Mysql - Docker Setup
 
-CDC sample application has a **producer** and a **consumer** that replicate from a database to another. **Cdc-producer** must be co-located with the **master** database to read its **binlog** files and generate Fluvio events. **Cdc-consumer** needs remote access to the **slave** database. For additional information, checkout [MYSQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html).
+CDC sample application has a **producer** and a **consumer** that replicate database changes in real-time. **Cdc-producer** must be co-located with the **master** database to read its **binlog** files and generate Fluvio events. **Cdc-consumer** needs remote access to the **slave** database. For additional information, checkout [MYSQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html).
 
 ## Prerequisites
 

@@ -4,7 +4,8 @@ The following application translates Mysql table changes into events that can be
 
 ## Requirements
 
-* Access to a Fluvio instance installed locally or in the cloud.
+* Access to a Fluvio installation (local or cloud)
+    * [Setup Fluvio Cloud](https://app.fluvio.io/login)
 
 * (Laptop Demo) with 2 mysql instances running on same machine:
     * [Setup Producer/Consumer Environment](./docker/README.MD)

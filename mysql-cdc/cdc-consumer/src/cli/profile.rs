@@ -28,9 +28,8 @@ impl Config {
         let mut profile: Profile = toml::from_str(&file_str)
             .map_err(|err| Error::new(ErrorKind::InvalidData, format!("{}", err)))?;
 
-        // expand tilde if used
-        if let Some(local_cache) = expand_tilde(&profile.local_cache) {
-            profile.local_cache = local_cache;
+        if let Some(last_offset_file) = expand_tilde(&profile.last_offset_file) {
+            profile.last_offset_file = last_offset_file;
         }
 
         Ok(Self { profile })
@@ -44,7 +43,7 @@ impl Config {
 
 #[derive(Debug, Default, PartialEq, Serialize, Deserialize)]
 pub struct Profile {
-    local_cache: PathBuf,
+    last_offset_file: PathBuf,
     database: Database,
     filters: Option<Filters>,
     fluvio: Option<Fluvio>,
@@ -71,8 +70,8 @@ pub struct Fluvio {
 }
 
 impl Profile {
-    pub fn local_cache(&self) -> &PathBuf {
-        &self.local_cache
+    pub fn last_offset_file(&self) -> &PathBuf {
+        &self.last_offset_file
     }
 
     pub fn ip_or_host(&self) -> Option<String> {
@@ -141,22 +140,22 @@ pub mod test {
 
     #[test]
     fn test_expand_tilde() {
-        let local_cache = PathBuf::from("~/data/cdc-consumer/mysql80");
+        let test_file = PathBuf::from("~/data/cdc-consumer/mysql80.offset");
 
-        let expanded = expand_tilde(&local_cache);
+        let expanded = expand_tilde(&test_file);
         assert!(expanded.is_some());
 
         let expected = PathBuf::from(format!(
             "{}{}",
             std::env::var("HOME").unwrap(),
-            "/data/cdc-consumer/mysql80"
+            "/data/cdc-consumer/mysql80.offset"
         ));
         assert_eq!(expanded.unwrap(), expected);
     }
 
     #[test]
     fn test_full_profile() {
-        let local_cache = expand_tilde(&PathBuf::from("~/data/cdc-consumer/mysql80")).unwrap();
+        let last_offset_file = expand_tilde(&PathBuf::from("~/data/consumer.offset")).unwrap();
         let profile_path = get_base_dir().join(PROFILE_FULL);
         let profile_file = Config::load(&profile_path);
 
@@ -166,7 +165,7 @@ pub mod test {
 
         assert!(profile_file.is_ok());
         let expected = Profile {
-            local_cache: local_cache.clone(),
+            last_offset_file: last_offset_file.clone(),
             database: Database {
                 ip_or_host: "localhost".to_owned(),
                 port: Some(3306),
@@ -183,7 +182,7 @@ pub mod test {
 
         let profile = profile_file.as_ref().unwrap().profile();
         assert_eq!(profile, &expected);
-        assert_eq!(profile.local_cache(), &local_cache);
+        assert_eq!(profile.last_offset_file(), &last_offset_file);
         assert_eq!(profile.ip_or_host(), Some("localhost".to_owned()));
         assert_eq!(profile.port(), 3306);
         assert_eq!(profile.user(), Some("root".to_owned()));
@@ -193,7 +192,7 @@ pub mod test {
 
     #[test]
     fn test_min_profile() {
-        let local_cache = expand_tilde(&PathBuf::from("/tmp/data/cdc-consumer/mysql80")).unwrap();
+        let last_offset_file = expand_tilde(&PathBuf::from("/tmp/data/consumer2.offset")).unwrap();
         let profile_path = get_base_dir().join(PROFILE_MIN);
         let profile_file = Config::load(&profile_path);
 
@@ -203,7 +202,7 @@ pub mod test {
 
         assert!(profile_file.is_ok());
         let expected = Profile {
-            local_cache: local_cache.clone(),
+            last_offset_file: last_offset_file.clone(),
             database: Database {
                 ip_or_host: "localhost".to_owned(),
                 user: "root".to_owned(),
@@ -216,7 +215,7 @@ pub mod test {
 
         let profile = profile_file.as_ref().unwrap().profile();
         assert_eq!(profile, &expected);
-        assert_eq!(profile.local_cache(), &local_cache);
+        assert_eq!(profile.last_offset_file(), &last_offset_file);
         assert_eq!(profile.ip_or_host(), Some("localhost".to_owned()));
         assert_eq!(profile.port(), 3306);
         assert_eq!(profile.user(), Some("root".to_owned()));

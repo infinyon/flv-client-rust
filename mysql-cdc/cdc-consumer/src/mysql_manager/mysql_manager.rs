@@ -64,8 +64,6 @@ impl MysqlManager {
         let operation = &flv_message.operation;
         let uri_props = parse_uri(&flv_message.uri)?;
 
-        println!("{:?}", &flv_message);
-        println!("{:?}", &uri_props);
         if !allowed_by_filters(&self.filters, &uri_props.db_name) {
             println!(
                 "msg for db '{}' skipped by filter",
@@ -73,6 +71,8 @@ impl MysqlManager {
             );
             return Ok(());
         }
+        println!("{:?}", &flv_message);
+        println!("{:?}", &uri_props);
 
         match operation {
             Operation::Query(query) => self.send_query_op(query, uri_props)?,

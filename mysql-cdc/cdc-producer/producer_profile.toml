@@ -25,7 +25,7 @@ password ="fluvio4cdc!"
 # Filters to include or exclude databases
 ##
 [filters]
-include_dbs = ["flvDb"]
+include_dbs = ["flvDb", "flvDb2"]
 
 ##
 # Fluvio streaming settings (defaults):

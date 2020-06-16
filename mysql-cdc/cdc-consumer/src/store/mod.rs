@@ -1,3 +1,3 @@
-mod local_store;
+mod offset_store;
 
-pub use local_store::LocalStore;
+pub use offset_store::OffsetStore;

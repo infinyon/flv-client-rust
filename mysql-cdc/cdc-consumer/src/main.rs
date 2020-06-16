@@ -10,7 +10,7 @@ use cli::get_cli_opt;
 use cli::Config;
 use fluvio::start_consumer;
 use mysql_manager::MysqlManager;
-use store::LocalStore;
+use store::OffsetStore;
 
 fn start_loop() -> Result<(), Error> {
     // read profile
@@ -19,7 +19,7 @@ fn start_loop() -> Result<(), Error> {
     let profile = config.profile();
 
     // init store
-    let mut store = LocalStore::init(profile.local_cache())?;
+    let mut offset_store = OffsetStore::init(profile.last_offset_file())?;
 
     // connect to db
     println!("Connecting to mysql database... ");
@@ -30,7 +30,7 @@ fn start_loop() -> Result<(), Error> {
     let (sender, receiver) = bounded::<String>(100);
 
     // start Fluvio consumer thread
-    start_consumer(&profile.topic(), store.offset(), sender)?;
+    start_consumer(&profile.topic(), offset_store.offset(), sender)?;
 
     loop {
         select! {
@@ -38,7 +38,7 @@ fn start_loop() -> Result<(), Error> {
                 match msg {
                     Ok(msg) => {
                         mysql.update_database(msg)?;
-                        store.increment_offset()?;
+                        offset_store.increment_offset()?;
                     }
                     Err(err) => {
                         println!("{}", err.to_string());
