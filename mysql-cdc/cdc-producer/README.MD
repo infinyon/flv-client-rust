@@ -16,7 +16,7 @@ Additional parameters may be configured as desired. [MYSQL Reference Manual](htt
 
 ## Producer Profile
 
-CDC producer reads configuration parameters from a profile file. These parameters help the producder glue the **binlog** files with **mysql server instance** and the **Fluvio stream**. The producer uses Mysql server instance to lookup table column names that MySQl chose to leave out of the binlog files.
+CDC producers read configuration parameters from a profile file. These parameters help the producer glue the **binlog** files with **mysql server instance** and the **Fluvio stream**. The producer uses Mysql server instance to lookup table column names that MySQl chose to leave out of the binlog files.
 
 ### Profile file
 
@@ -66,17 +66,17 @@ include_dbs = [<db-name>, ...]
 #       replica: 1
 ## 
 [fluvio]
-topic ="rust-mysql-cdc"
-replicas = 1
+topic = <topic-name>
+replicas = <replication-factor>
 ```
 
-### Start Consumer
+### Start Producer
 
-Provisioning a consumer to watch a local database is a 2 step process:
+Provisioning a producer to watch a local database is a 2 step process:
 
 1) Create a profile to match your database settings
 2) Start producer with custom profile
 
 ```
-$ ./target/debug/cdc-producer ./my-custom-config.toml
+$ ./target/debug/cdc-producer ./my-producer-profile.toml
 ```

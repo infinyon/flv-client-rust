@@ -13,7 +13,7 @@ Access to a Fluvio installation (local or cloud)
 
 ## Standalone Deployment
 
-For a standalone deployment using your own databases, use instructions in [cdc-consumer](./cdc-consumer/README.MD) and [cdc-producer](./cdc-producer/README.MD) sections.
+For a standalone deployment using your own databases, follow the instructions in [cdc-producer](./cdc-producer/README.MD) and [cdc-consumer](./cdc-consumer/README.MD) sections.
 
 
 ## Laptop Demo Deployment
