@@ -267,8 +267,10 @@ checksum = "7bbb73db36c1246e9034e307d0fba23f9a2e251faa47ade70c1bd252220c8311"
 name = "cdc-consumer"
 version = "0.1.0"
 dependencies = [
+ "async-std",
  "bigdecimal 0.1.2",
  "cdc-messages",
+ "crossbeam-channel",
  "ctrlc",
  "dirs 2.0.2",
  "flv-client",
@@ -297,7 +299,9 @@ dependencies = [
 name = "cdc-producer"
 version = "0.1.0"
 dependencies = [
+ "async-std",
  "cdc-messages",
+ "crossbeam-channel",
  "ctrlc",
  "dirs 2.0.2",
  "flv-client",
@@ -413,6 +417,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ba125de2af0df55319f41944744ad91c71113bf74a4646efff39afe1f6842db1"
 dependencies = [
  "cfg-if",
+]
+
+[[package]]
+name = "crossbeam-channel"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cced8691919c02aac3cb0a1bc2e9b73d89e832bf9a06fc579d4e71b68a2da061"
+dependencies = [
+ "crossbeam-utils",
+ "maybe-uninit",
 ]
 
 [[package]]
@@ -1126,11 +1140,11 @@ version = "1.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f1a23f8f48f2355579ba5f5a99fdef69ccc9e4c143328d27a319da1c31e13dd9"
 dependencies = [
- "kf-protocol-api 0.1.0",
+ "kf-protocol-api",
  "kf-protocol-core",
  "kf-protocol-derive",
  "kf-protocol-fs",
- "kf-protocol-message 0.1.1",
+ "kf-protocol-message",
  "kf-protocol-transport",
  "log",
 ]
@@ -1140,22 +1154,6 @@ name = "kf-protocol-api"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c9d2e0580cdcadf4be7c75abe9f74f4ac011abddfc9561f493eb21d25086d82b"
-dependencies = [
- "content_inspector",
- "crc32c",
- "flv-util 0.1.1",
- "kf-protocol-core",
- "kf-protocol-derive",
- "log",
- "paste",
- "serde",
-]
-
-[[package]]
-name = "kf-protocol-api"
-version = "1.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "735e37b0b2e31eee7fbcaece5de2c1d00a2b0533d5e86fc00fb956794c595261"
 dependencies = [
  "content_inspector",
  "crc32c",
@@ -1194,16 +1192,16 @@ dependencies = [
 
 [[package]]
 name = "kf-protocol-fs"
-version = "1.1.0"
+version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b1a914231af94639f31ddcd9cc3ed8e88ac6fe1bfabecd7bb3e5ff6975193742"
+checksum = "728b9376fcd4ac2e9538f2323d4b1a59a992b7553be53b7e71497d3f10d7f02f"
 dependencies = [
  "bytes 0.5.4",
  "flv-future-aio",
  "futures",
- "kf-protocol-api 1.0.1",
+ "kf-protocol-api",
  "kf-protocol-core",
- "kf-protocol-message 1.0.0",
+ "kf-protocol-message",
  "log",
 ]
 
@@ -1216,24 +1214,7 @@ dependencies = [
  "content_inspector",
  "crc32c",
  "flv-util 0.2.0",
- "kf-protocol-api 0.1.0",
- "kf-protocol-core",
- "kf-protocol-derive",
- "log",
- "paste",
- "serde",
-]
-
-[[package]]
-name = "kf-protocol-message"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9419fad755a7d8b67c655e8a0f5641ede6762704f26509b8d442ad9fe738063b"
-dependencies = [
- "content_inspector",
- "crc32c",
- "flv-util 0.2.0",
- "kf-protocol-api 1.0.1",
+ "kf-protocol-api",
  "kf-protocol-core",
  "kf-protocol-derive",
  "log",
