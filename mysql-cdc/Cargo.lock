@@ -267,10 +267,8 @@ checksum = "7bbb73db36c1246e9034e307d0fba23f9a2e251faa47ade70c1bd252220c8311"
 name = "cdc-consumer"
 version = "0.1.0"
 dependencies = [
- "async-std",
  "bigdecimal 0.1.2",
  "cdc-messages",
- "crossbeam-channel",
  "ctrlc",
  "dirs 2.0.2",
  "flv-client",
@@ -299,9 +297,7 @@ dependencies = [
 name = "cdc-producer"
 version = "0.1.0"
 dependencies = [
- "async-std",
  "cdc-messages",
- "crossbeam-channel",
  "ctrlc",
  "dirs 2.0.2",
  "flv-client",
@@ -417,16 +413,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ba125de2af0df55319f41944744ad91c71113bf74a4646efff39afe1f6842db1"
 dependencies = [
  "cfg-if",
-]
-
-[[package]]
-name = "crossbeam-channel"
-version = "0.4.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cced8691919c02aac3cb0a1bc2e9b73d89e832bf9a06fc579d4e71b68a2da061"
-dependencies = [
- "crossbeam-utils",
- "maybe-uninit",
 ]
 
 [[package]]

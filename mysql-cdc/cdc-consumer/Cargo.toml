@@ -5,7 +5,6 @@ authors = ["Fluvio Contributors <team@fluvio.io>"]
 edition = "2018"
 
 [dependencies]
-crossbeam-channel = "0.4.2"
 mysql = "18.2.0"
 toml = "0.5.6"
 serde = { version = "1.0", features = ["derive"] }
@@ -16,7 +15,6 @@ bigdecimal = "0.1.2"
 http = "0.2.1"
 flv-client = "3.1.0"
 flv-future-aio = "2.2.1"
-async-std = "1.6.0"
 structopt = { version = "0.3", default-features = false }
 futures = { version = "0.3.4", features = ['async-await'] }
 cdc-messages = { path="../cdc-messages" }
