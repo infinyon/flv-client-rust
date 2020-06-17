@@ -1,5 +1,0 @@
-last_offset_file = "/tmp/data/consumer2.offset"
-
-[database]
-ip_or_host = "localhost"
-user = "root"
